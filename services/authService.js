@@ -14,8 +14,8 @@ export const loginUser = async (username, password) => {
       }),
     });
   } catch {
-    // Falla de red (sin internet, servidor caído, etc.)
-    throw new Error('No se pudo conectar con el servidor. Intenta de nuevo.');
+
+      throw new Error('No se pudo conectar con el servidor. Intenta de nuevo.');
   }
 
   const data = await response.json().catch(() => ({}));

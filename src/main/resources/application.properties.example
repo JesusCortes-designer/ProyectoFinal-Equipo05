@@ -1,0 +1,33 @@
+spring.application.name=terminal-autobuses
+server.port=8080
+
+# base de datos (MySQL)
+spring.datasource.url=jdbc:mysql://localhost:3306/terminal_autobuses?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Mexico_City
+spring.datasource.username=
+spring.datasource.password=
+
+# las tablas las crea flyway, jpa no toca el esquema
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.open-in-view=false
+spring.flyway.enabled=true
+
+# jwt (secreto en base64, minimo 32 bytes)
+app.jwt.secreto=
+app.jwt.expiracionMs=3600000
+
+# origenes permitidos del frontend, separados por coma
+app.cors.origenes=http://localhost:5173
+
+# correo (postfix local en el vps)
+spring.mail.host=localhost
+spring.mail.port=25
+spring.mail.username=
+spring.mail.password=
+app.correo.remitente=
+app.frontend.url=http://localhost:5173
+
+# twilio (sms y whatsapp)
+twilio.accountSid=
+twilio.authToken=
+twilio.numeroSms=
+twilio.numeroWhatsapp=
