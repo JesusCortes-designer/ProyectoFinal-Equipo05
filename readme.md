@@ -244,10 +244,3 @@ Los errores regresan en JSON: 400 datos inválidos de negocio, 401 sin token o c
 4. Certificado HTTPS con Let's Encrypt: `sudo certbot --nginx -d tu-dominio`.
 5. Postfix instalado en el mismo VPS, con registros SPF y DKIM en el DNS del dominio.
 
-## Respaldo de la base de datos
-
-El script de respaldo está en `respaldo.sql` en la raíz del repositorio. Para generarlo de nuevo:
-
-```bash
-mysqldump -u usuario -p terminal_autobuses > respaldo.sql
-```
