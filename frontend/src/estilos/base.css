@@ -1,0 +1,120 @@
+/* paleta del proyecto (la misma del prototipo de Figma) */
+:root {
+  --azul-1: #e9f1ff;
+  --azul-2: #a5cbfe;
+  --azul-3: #3fa7fd;
+  --azul-4: #1181cb;
+  --azul-5: #095d94;
+  --azul-6: #043b60;
+  --azul-7: #011b31;
+
+  --naranja-1: #ffede6;
+  --naranja-2: #feccb4;
+  --naranja-3: #fd953f;
+  --naranja-4: #cc7215;
+  --naranja-5: #98540d;
+  --naranja-6: #683706;
+
+  --gris-1: #f0f1f1;
+  --gris-2: #c7c9cb;
+  --gris-3: #9fa2a6;
+  --gris-4: #7a7d80;
+  --gris-5: #58595c;
+  --gris-6: #37383a;
+  --gris-7: #1a1a1b;
+
+  --exito: #12b76a;
+  --exito-fondo: #d1fadf;
+  --exito-texto: #05603a;
+  --error: #d92d20;
+  --error-fondo: #fee4e2;
+  --error-texto: #912018;
+
+  --fondo: #f0f1f1;
+  --superficie: #ffffff;
+  --radio-boton: 4px;
+  --radio-tarjeta: 6px;
+  --ancho-menu: 240px;
+  --alto-barra: 56px;
+  --fuente: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--fuente);
+  background: var(--fondo);
+  color: var(--gris-7);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+:focus-visible {
+  outline: 2px solid var(--azul-3);
+  outline-offset: 2px;
+}
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.texto-suave {
+  color: var(--gris-4);
+  font-size: 0.87rem;
+}
+
+.enlace {
+  color: var(--azul-4);
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.enlace:hover {
+  text-decoration: underline;
+}
+
+.enlace--acento {
+  color: var(--naranja-4);
+  font-weight: 600;
+}
