@@ -1,0 +1,25 @@
+meta {
+  name: Cancelar reservacion
+  type: http
+  seq: 8
+}
+
+put {
+  url: {{url}}/api/reservaciones/{{reservacionId}}/cancelar
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenClientePrueba}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

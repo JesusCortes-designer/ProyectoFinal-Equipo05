@@ -1,0 +1,32 @@
+meta {
+  name: Reservar sin asientos (validacion)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/reservaciones
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenClientePrueba}}
+}
+
+body:json {
+  {
+    "viajeId": "{{viajeId}}",
+    "asientos": []
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

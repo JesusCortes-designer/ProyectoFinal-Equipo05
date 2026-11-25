@@ -1,0 +1,25 @@
+meta {
+  name: Eliminar terminal temporal
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{url}}/api/terminales/{{terminalTempId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+assert {
+  res.status: eq 204
+}
+
+tests {
+  test("responde 204", function() {
+    expect(res.getStatus()).to.equal(204);
+  });
+}

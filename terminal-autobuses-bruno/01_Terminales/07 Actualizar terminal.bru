@@ -1,0 +1,33 @@
+meta {
+  name: Actualizar terminal
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{url}}/api/terminales/{{terminalId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "Terminal Bruno Editada",
+    "ciudad": "Oaxaca",
+    "direccion": "Calle Nueva 456"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

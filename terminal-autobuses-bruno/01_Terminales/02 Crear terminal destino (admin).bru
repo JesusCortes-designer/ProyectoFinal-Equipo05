@@ -1,0 +1,37 @@
+meta {
+  name: Crear terminal destino (admin)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/terminales
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "Terminal Destino {{sufijo}}",
+    "ciudad": "Tuxtla",
+    "direccion": "Av. Central 45"
+  }
+}
+
+script:post-response {
+  bru.setVar("terminalDestinoId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

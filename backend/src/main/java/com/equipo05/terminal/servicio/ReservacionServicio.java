@@ -17,7 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -100,20 +101,29 @@ public class ReservacionServicio {
     }
 
     // aqui se manda el mismo aviso por los 3 canales
-    private void avisarAlCliente(Cliente cliente, Viaje viaje, Reservacion reservacion) {
-        String asientos = reservacion.getBoletos().stream()
-                .map(b -> String.valueOf(b.getNumeroAsiento())).reduce((a, b) -> a + ", " + b).orElse("");
-        String resumen = "Reservación #" + reservacion.getId() + " confirmada: "
-                + viaje.getRuta().getOrigen() + " a " + viaje.getRuta().getDestino()
-                + ", sale el " + viaje.getFechaSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
-                + ", asientos " + asientos + ", total $" + reservacion.getTotal();
+    // aqui se manda el mismo aviso por los 3 canales
+private void avisarAlCliente(Cliente cliente, Viaje viaje, Reservacion reservacion) {
+    String asientos = reservacion.getBoletos().stream()
+            .map(b -> String.valueOf(b.getNumeroAsiento())).reduce((a, b) -> a + ", " + b).orElse("");
+    String resumen = "Reservación #" + reservacion.getId() + " confirmada: "
+            + viaje.getRuta().getOrigen() + " a " + viaje.getRuta().getDestino()
+            + ", sale el " + viaje.getFechaSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+            + ", asientos " + asientos + ", total $" + reservacion.getTotal();
 
-        String correo = cliente.getUsuario().getCorreo();
-        String nombre = cliente.getUsuario().getNombre();
-        String telefono = cliente.getTelefono();
+    String correo = cliente.getUsuario().getCorreo();
+    String nombre = cliente.getUsuario().getNombre();
+    String telefono = cliente.getTelefono();
 
-        correoServicio.enviar(correo, "Reservación confirmada", "Hola " + nombre + ",\n" + resumen);
-        smsServicio.enviar(telefono, resumen);
-        whatsappServicio.enviar(telefono, resumen);
-    }
+    correoServicio.enviar(correo, "Reservación confirmada", "Hola " + nombre + ",\n" + resumen);
+    smsServicio.enviar(telefono, resumen);
+
+    Map<String, String> variables = new LinkedHashMap<>();
+    variables.put("1", nombre);
+    variables.put("2", String.valueOf(reservacion.getId()));
+    variables.put("3", viaje.getRuta().getOrigen() + " a " + viaje.getRuta().getDestino());
+    variables.put("4", viaje.getFechaSalida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+    variables.put("5", asientos);
+    variables.put("6", String.valueOf(reservacion.getTotal()));
+    whatsappServicio.enviar(telefono, resumen, variables);
+}
 }

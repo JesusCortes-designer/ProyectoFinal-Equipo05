@@ -1,0 +1,21 @@
+meta {
+  name: Perfil sin token
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{url}}/api/usuarios/perfil
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 401
+}
+
+tests {
+  test("responde 401", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+}

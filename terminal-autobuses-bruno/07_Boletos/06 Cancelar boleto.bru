@@ -1,0 +1,25 @@
+meta {
+  name: Cancelar boleto
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{url}}/api/boletos/{{boletoId}}/cancelar
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenTaquilla}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

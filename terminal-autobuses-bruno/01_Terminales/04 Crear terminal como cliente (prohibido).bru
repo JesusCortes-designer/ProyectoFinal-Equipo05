@@ -1,0 +1,33 @@
+meta {
+  name: Crear terminal como cliente (prohibido)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/api/terminales
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenCliente}}
+}
+
+body:json {
+  {
+    "nombre": "No",
+    "ciudad": "No",
+    "direccion": "No"
+  }
+}
+
+assert {
+  res.status: eq 403
+}
+
+tests {
+  test("responde 403", function() {
+    expect(res.getStatus()).to.equal(403);
+  });
+}

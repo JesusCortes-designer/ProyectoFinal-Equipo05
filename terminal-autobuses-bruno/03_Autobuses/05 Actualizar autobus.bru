@@ -1,0 +1,35 @@
+meta {
+  name: Actualizar autobus
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{url}}/api/autobuses/{{autobusId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "placa": "BR-{{sufijo}}",
+    "modelo": "Volvo 9800",
+    "capacidad": 45,
+    "estado": "DISPONIBLE",
+    "terminalId": "{{terminalId}}"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

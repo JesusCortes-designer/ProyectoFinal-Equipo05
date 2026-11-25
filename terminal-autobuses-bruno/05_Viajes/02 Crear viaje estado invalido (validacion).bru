@@ -1,0 +1,36 @@
+meta {
+  name: Crear viaje estado invalido (validacion)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/viajes
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "fechaSalida": "2027-03-10T08:00:00",
+    "fechaLlegada": "2027-03-10T15:00:00",
+    "estado": "LOQUESEA",
+    "autobusId": "{{autobusId}}",
+    "choferId": "{{choferId}}",
+    "rutaId": "{{rutaId}}"
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

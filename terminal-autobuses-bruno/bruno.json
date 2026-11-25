@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Terminal Autobuses - Equipo 05",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -1,0 +1,39 @@
+meta {
+  name: Reservar asiento (cliente)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/reservaciones
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenClientePrueba}}
+}
+
+body:json {
+  {
+    "viajeId": "{{viajeId}}",
+    "asientos": [
+      1,
+      2
+    ]
+  }
+}
+
+script:post-response {
+  bru.setVar("reservacionId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

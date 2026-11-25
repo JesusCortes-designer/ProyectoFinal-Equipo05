@@ -1,0 +1,40 @@
+meta {
+  name: Registro cliente nuevo
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{url}}/api/auth/registro
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "Prueba",
+    "apellido": "Bruno",
+    "correo": "{{correoNuevo}}",
+    "contrasena": "Prueba123!",
+    "edad": 22,
+    "telefono": "+525500000000"
+  }
+}
+
+script:pre-request {
+  bru.setVar("correoNuevo", "bruno" + Date.now() + "@test.com");
+}
+
+script:post-response {
+  bru.setVar("clientePruebaId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

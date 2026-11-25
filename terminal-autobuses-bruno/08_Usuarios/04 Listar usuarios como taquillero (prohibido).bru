@@ -1,0 +1,25 @@
+meta {
+  name: Listar usuarios como taquillero (prohibido)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{url}}/api/usuarios
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenTaquilla}}
+}
+
+assert {
+  res.status: eq 403
+}
+
+tests {
+  test("responde 403", function() {
+    expect(res.getStatus()).to.equal(403);
+  });
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Listar reservaciones como cliente (prohibido)
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{url}}/api/reservaciones
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenCliente}}
+}
+
+assert {
+  res.status: eq 403
+}
+
+tests {
+  test("responde 403", function() {
+    expect(res.getStatus()).to.equal(403);
+  });
+}

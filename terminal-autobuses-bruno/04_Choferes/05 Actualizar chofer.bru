@@ -1,0 +1,35 @@
+meta {
+  name: Actualizar chofer
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{url}}/api/choferes/{{choferId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "Pedro",
+    "apellido": "Lopez Ruiz",
+    "licencia": "LIC-{{sufijo}}",
+    "telefono": "+525511112222",
+    "terminalId": "{{terminalId}}"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Perfil con token
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{url}}/api/usuarios/perfil
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

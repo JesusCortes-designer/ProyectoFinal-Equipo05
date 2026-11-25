@@ -1,0 +1,25 @@
+meta {
+  name: Obtener terminal
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{url}}/api/terminales/{{terminalId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenTaquilla}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

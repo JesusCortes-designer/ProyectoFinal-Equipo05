@@ -1,0 +1,34 @@
+meta {
+  name: Reservar asiento ocupado (400)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/reservaciones
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenClientePrueba}}
+}
+
+body:json {
+  {
+    "viajeId": "{{viajeId}}",
+    "asientos": [
+      1
+    ]
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

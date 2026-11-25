@@ -1,0 +1,32 @@
+meta {
+  name: Registro contrasena debil (validacion)
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{url}}/api/auth/registro
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "Prueba",
+    "apellido": "Bruno",
+    "correo": "debil@test.com",
+    "contrasena": "123",
+    "edad": 22,
+    "telefono": "+525500000000"
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

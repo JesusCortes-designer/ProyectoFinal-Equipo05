@@ -1,0 +1,32 @@
+meta {
+  name: Login cliente
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "correo": "{{clienteCorreo}}",
+    "contrasena": "{{clientePass}}"
+  }
+}
+
+script:post-response {
+  bru.setVar("tokenCliente", res.body.token);
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

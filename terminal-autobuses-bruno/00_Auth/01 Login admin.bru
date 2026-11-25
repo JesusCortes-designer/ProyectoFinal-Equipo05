@@ -1,0 +1,35 @@
+meta {
+  name: Login admin
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "correo": "{{adminCorreo}}",
+    "contrasena": "{{adminPass}}"
+  }
+}
+
+script:post-response {
+  bru.setVar("tokenAdmin", res.body.token);
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("trae token", function() {
+    expect(res.body.token).to.be.a("string");
+  });
+}
