@@ -1,0 +1,40 @@
+meta {
+  name: Crear usuario (admin)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/usuarios
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "Nuevo",
+    "apellido": "Taquillero",
+    "correo": "taq{{sufijo}}@test.com",
+    "contrasena": "Taquilla123!",
+    "edad": 30,
+    "rol": "TAQUILLERO"
+  }
+}
+
+script:post-response {
+  bru.setVar("usuarioId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

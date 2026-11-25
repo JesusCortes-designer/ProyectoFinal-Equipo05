@@ -1,0 +1,41 @@
+meta {
+  name: Crear terminal (admin)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/terminales
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "Terminal Bruno {{sufijo}}",
+    "ciudad": "Oaxaca",
+    "direccion": "Calle Prueba 123"
+  }
+}
+
+script:pre-request {
+  bru.setVar("sufijo", Date.now());
+}
+
+script:post-response {
+  bru.setVar("terminalId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

@@ -1,0 +1,34 @@
+meta {
+  name: Reservar como admin (prohibido)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/api/reservaciones
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "viajeId": "{{viajeId}}",
+    "asientos": [
+      5
+    ]
+  }
+}
+
+assert {
+  res.status: eq 403
+}
+
+tests {
+  test("responde 403", function() {
+    expect(res.getStatus()).to.equal(403);
+  });
+}

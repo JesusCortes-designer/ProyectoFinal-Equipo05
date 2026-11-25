@@ -1,0 +1,40 @@
+meta {
+  name: Crear viaje (admin)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/viajes
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "fechaSalida": "2027-03-10T08:00:00",
+    "fechaLlegada": "2027-03-10T15:00:00",
+    "estado": "PROGRAMADO",
+    "autobusId": "{{autobusId}}",
+    "choferId": "{{choferId}}",
+    "rutaId": "{{rutaId}}"
+  }
+}
+
+script:post-response {
+  bru.setVar("viajeId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

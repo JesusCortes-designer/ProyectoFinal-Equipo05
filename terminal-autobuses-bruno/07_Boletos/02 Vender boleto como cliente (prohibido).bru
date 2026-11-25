@@ -1,0 +1,32 @@
+meta {
+  name: Vender boleto como cliente (prohibido)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/boletos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenCliente}}
+}
+
+body:json {
+  {
+    "viajeId": "{{viajeId}}",
+    "numeroAsiento": 11
+  }
+}
+
+assert {
+  res.status: eq 403
+}
+
+tests {
+  test("responde 403", function() {
+    expect(res.getStatus()).to.equal(403);
+  });
+}

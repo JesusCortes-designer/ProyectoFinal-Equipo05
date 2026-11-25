@@ -1,0 +1,27 @@
+meta {
+  name: Recuperar contrasena
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{url}}/api/auth/recuperar
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "correo": "{{clienteCorreo}}"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

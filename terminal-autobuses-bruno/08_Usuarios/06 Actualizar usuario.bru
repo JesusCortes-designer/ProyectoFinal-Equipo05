@@ -1,0 +1,35 @@
+meta {
+  name: Actualizar usuario
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{url}}/api/usuarios/{{usuarioId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "Nuevo",
+    "apellido": "Editado",
+    "edad": 31,
+    "rol": "TAQUILLERO",
+    "activo": true
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

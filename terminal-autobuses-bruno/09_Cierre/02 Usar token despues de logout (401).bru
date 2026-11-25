@@ -1,0 +1,25 @@
+meta {
+  name: Usar token despues de logout (401)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/usuarios/perfil
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenClientePrueba}}
+}
+
+assert {
+  res.status: eq 401
+}
+
+tests {
+  test("responde 401", function() {
+    expect(res.getStatus()).to.equal(401);
+  });
+}

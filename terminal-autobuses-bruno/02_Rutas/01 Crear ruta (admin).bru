@@ -1,0 +1,43 @@
+meta {
+  name: Crear ruta (admin)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/rutas
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "origen": "Oaxaca",
+    "destino": "Tuxtla",
+    "distanciaKm": 480.5,
+    "duracionMinutos": 420,
+    "precioBase": 350.0,
+    "terminalIds": [
+      "{{terminalId}}",
+      "{{terminalDestinoId}}"
+    ]
+  }
+}
+
+script:post-response {
+  bru.setVar("rutaId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

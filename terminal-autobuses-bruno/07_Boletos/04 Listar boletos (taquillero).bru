@@ -1,0 +1,25 @@
+meta {
+  name: Listar boletos (taquillero)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{url}}/api/boletos?buscar=&estado=&pagina=1&tamano=10
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenTaquilla}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

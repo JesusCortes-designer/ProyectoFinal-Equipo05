@@ -1,0 +1,25 @@
+meta {
+  name: Listar autobuses
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/api/autobuses?pagina=1&tamano=10&estado=
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenTaquilla}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

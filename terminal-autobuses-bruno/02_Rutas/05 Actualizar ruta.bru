@@ -1,0 +1,39 @@
+meta {
+  name: Actualizar ruta
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{url}}/api/rutas/{{rutaId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "origen": "Oaxaca",
+    "destino": "Tuxtla",
+    "distanciaKm": 480.5,
+    "duracionMinutos": 430,
+    "precioBase": 360.0,
+    "terminalIds": [
+      "{{terminalId}}",
+      "{{terminalDestinoId}}"
+    ]
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

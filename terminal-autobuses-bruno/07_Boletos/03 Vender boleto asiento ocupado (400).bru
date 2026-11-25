@@ -1,0 +1,32 @@
+meta {
+  name: Vender boleto asiento ocupado (400)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/boletos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenTaquilla}}
+}
+
+body:json {
+  {
+    "viajeId": "{{viajeId}}",
+    "numeroAsiento": 10
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

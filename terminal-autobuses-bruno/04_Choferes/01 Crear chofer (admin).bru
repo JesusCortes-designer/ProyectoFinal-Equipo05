@@ -1,0 +1,39 @@
+meta {
+  name: Crear chofer (admin)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/choferes
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "Pedro",
+    "apellido": "Lopez",
+    "licencia": "LIC-{{sufijo}}",
+    "telefono": "+525511112222",
+    "terminalId": "{{terminalId}}"
+  }
+}
+
+script:post-response {
+  bru.setVar("choferId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

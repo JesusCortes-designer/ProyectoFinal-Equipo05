@@ -15,9 +15,9 @@ Sistema web para administrar una terminal de autobuses. El administrador da de a
 
 | Qué | Enlace |
 |---|---|
-| Proyecto desplegado (HTTPS) | https://PONER-AQUI-TU-DOMINIO |
-| URL base de la API | https://PONER-AQUI-TU-DOMINIO/api |
-| Tablero de GitHub Projects | PONER-AQUI-EL-LINK |
+| Proyecto desplegado (HTTPS) | https://equipo05.com     |
+| URL base de la API | https://equipo05.com/api |
+| Tablero de GitHub Projects | aqui me falta poner un link |
 | Prototipo de Figma | PONER-AQUI-EL-LINK |
 
 ## Tecnologías

@@ -18,14 +18,20 @@ public class SmsServicio {
     @Value("${twilio.numeroSms:}")
     private String numeroOrigen;
 
+    // solo cuenta trial: nombre de la plantilla de twilio (se copia de la pestana API de "Try out SMS")
+    @Value("${twilio.plantillaSms:}")
+    private String plantillaSms;
+
     @Async
     public void enviar(String telefono, String texto) {
         if (accountSid.isBlank() || numeroOrigen.isBlank()) {
             log.warn("SMS no enviado, falta configurar twilio");
             return;
         }
+        // en trial el cuerpo debe ser el nombre de una plantilla de twilio, en cuenta normal va el texto
+        String cuerpo = plantillaSms.isBlank() ? texto : plantillaSms.trim();
         try {
-            Message.creator(new PhoneNumber(telefono), new PhoneNumber(numeroOrigen), texto).create();
+            Message.creator(new PhoneNumber(telefono.trim()), new PhoneNumber(numeroOrigen.trim()), cuerpo).create();
         } catch (Exception e) {
             log.warn("No se pudo enviar el sms a {}: {}", telefono, e.getMessage());
         }

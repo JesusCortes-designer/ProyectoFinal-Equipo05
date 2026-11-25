@@ -1,0 +1,36 @@
+meta {
+  name: Crear usuario rol invalido (validacion)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/usuarios
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "X",
+    "apellido": "X",
+    "correo": "x@test.com",
+    "contrasena": "Taquilla123!",
+    "edad": 30,
+    "rol": "JEFE"
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

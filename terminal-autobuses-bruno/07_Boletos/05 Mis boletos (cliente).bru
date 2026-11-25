@@ -1,0 +1,25 @@
+meta {
+  name: Mis boletos (cliente)
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/api/boletos/mios?pagina=1&tamano=10
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenClientePrueba}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

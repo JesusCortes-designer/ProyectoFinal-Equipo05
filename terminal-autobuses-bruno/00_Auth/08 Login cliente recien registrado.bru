@@ -1,0 +1,32 @@
+meta {
+  name: Login cliente recien registrado
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{url}}/api/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "correo": "{{correoNuevo}}",
+    "contrasena": "Prueba123!"
+  }
+}
+
+script:post-response {
+  bru.setVar("tokenClientePrueba", res.body.token);
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

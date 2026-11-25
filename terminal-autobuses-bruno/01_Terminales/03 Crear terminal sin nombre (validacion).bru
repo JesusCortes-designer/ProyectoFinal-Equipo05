@@ -1,0 +1,33 @@
+meta {
+  name: Crear terminal sin nombre (validacion)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/terminales
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "",
+    "ciudad": "X",
+    "direccion": "Y"
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

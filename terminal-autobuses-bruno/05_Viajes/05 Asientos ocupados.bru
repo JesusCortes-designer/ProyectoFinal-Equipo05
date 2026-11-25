@@ -1,0 +1,25 @@
+meta {
+  name: Asientos ocupados
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/api/viajes/{{viajeId}}/asientos-ocupados
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenCliente}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

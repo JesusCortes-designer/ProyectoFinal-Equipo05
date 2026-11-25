@@ -1,0 +1,35 @@
+meta {
+  name: Crear chofer telefono invalido (validacion)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/choferes
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "nombre": "P",
+    "apellido": "L",
+    "licencia": "L1",
+    "telefono": "123",
+    "terminalId": "{{terminalId}}"
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

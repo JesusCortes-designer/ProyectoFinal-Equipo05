@@ -1,0 +1,36 @@
+meta {
+  name: Vender boleto (taquillero)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/boletos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenTaquilla}}
+}
+
+body:json {
+  {
+    "viajeId": "{{viajeId}}",
+    "numeroAsiento": 10
+  }
+}
+
+script:post-response {
+  bru.setVar("boletoId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

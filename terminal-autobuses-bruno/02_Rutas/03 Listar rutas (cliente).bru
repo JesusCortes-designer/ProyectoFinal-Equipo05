@@ -1,0 +1,25 @@
+meta {
+  name: Listar rutas (cliente)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/api/rutas?pagina=1&tamano=10
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenCliente}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

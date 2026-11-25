@@ -1,0 +1,36 @@
+meta {
+  name: Crear ruta precio invalido (validacion)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/rutas
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "origen": "A",
+    "destino": "B",
+    "distanciaKm": 0,
+    "duracionMinutos": 0,
+    "precioBase": 0,
+    "terminalIds": []
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

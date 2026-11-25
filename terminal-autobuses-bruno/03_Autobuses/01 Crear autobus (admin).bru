@@ -1,0 +1,39 @@
+meta {
+  name: Crear autobus (admin)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/autobuses
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "placa": "BR-{{sufijo}}",
+    "modelo": "Volvo 9700",
+    "capacidad": 40,
+    "estado": "DISPONIBLE",
+    "terminalId": "{{terminalId}}"
+  }
+}
+
+script:post-response {
+  bru.setVar("autobusId", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("responde 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}
