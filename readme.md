@@ -15,27 +15,27 @@ Sistema web para administrar una terminal de autobuses. El administrador da de a
 
 | Qué | Enlace |
 |---|---|
-| Proyecto desplegado (HTTPS) | https://equipo05.com     |
+| Proyecto desplegado (HTTPS) | https://equipo05.com |
 | URL base de la API | https://equipo05.com/api |
 | Tablero de GitHub Projects | https://github.com/users/JesusCortes-designer/projects/1/views/1 |
-| Prototipo de Figma | PONER-AQUI-EL-LINK |
+| Prototipo de Figma | https://www.figma.com/proto/CgJETkFHI0XdeYHSdm8bhr/Sin-t%C3%ADtulo?node-id=135-229&t=IhKYrEGkzcojsuzK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=135%3A2258 |
 
 ## Tecnologías
 
 - **Backend:** Java 17, Spring Boot 3, Spring Security + JWT, Spring Data JPA, Bean Validation
-- **Frontend:** React + Vite
+- **Frontend:** React 18 + Vite 5, React Router 6, Axios
 - **Base de datos:** MySQL 8 con migraciones de Flyway
-- **Comunicación:** Postfix + JavaMailSender (correo), Twilio (SMS y WhatsApp)
-- **Pruebas de API:** Bruno (carpeta `bruno/`)
+- **Comunicación:** Postfix + JavaMailSender (correo), Twilio (SMS), Infobip (WhatsApp)
+- **Pruebas de API:** Bruno (carpeta `terminal-autobuses-bruno/`)
 - **Despliegue:** VPS con Nginx, Let's Encrypt (Certbot) y systemd
 
 ## Estructura del repositorio
 
 ```
-├── backend/     API REST con Spring Boot
-├── frontend/    aplicación React
-├── bruno/       colección de pruebas de la API
-└── README.md
+├── backend/                    API REST con Spring Boot
+├── frontend/                   aplicación React (Vite)
+├── terminal-autobuses-bruno/   colección de pruebas de la API
+└── readme.md
 ```
 
 ## Credenciales de prueba
@@ -60,7 +60,7 @@ mysql -u root -p -e "CREATE DATABASE terminal_autobuses CHARACTER SET utf8mb4;"
 cp src/main/resources/application.properties.example src/main/resources/application.properties
 ```
 
-Edita `application.properties` con tus datos (usuario y contraseña de MySQL, secreto del JWT, correo y Twilio). Para generar el secreto del JWT:
+Edita `application.properties` con tus datos (usuario y contraseña de MySQL, secreto del JWT, correo y credenciales de Twilio e Infobip). Para generar el secreto del JWT:
 
 ```bash
 openssl rand -base64 32
@@ -76,15 +76,68 @@ Flyway crea las tablas y `SemillaDatos` carga los datos de prueba. La API queda 
 
 ### Frontend
 
+Con el backend corriendo en el puerto 8080:
+
 ```bash
 cd frontend
 npm install
+cp .env.example .env      # en PowerShell: Copy-Item .env.example .env
 npm run dev
+```
+
+Se abre en `http://localhost:5173`. En desarrollo, Vite redirige las peticiones de `/api` al backend, así que no hay problemas de CORS. Si el backend corre en otro puerto, cambia `VITE_PROXY_DESTINO` en `frontend/.env`.
+
+Para generar la versión de producción:
+
+```bash
+npm run build      # crea frontend/dist
 ```
 
 ### Pruebas con Bruno
 
-Abre la carpeta `bruno/` desde Bruno, elige el entorno y corre primero `Login` para obtener el token JWT.
+Abre la carpeta `terminal-autobuses-bruno/` desde Bruno, elige el entorno y corre primero `Login` para obtener el token JWT.
+
+## Frontend
+
+### Estructura
+
+```
+frontend/src/
+├── api/            clienteApi.js (axios + token JWT + manejo de 401)
+├── servicios/      una función por endpoint del backend
+├── contexto/       sesión (AutenticacionContexto) y avisos (AvisosContexto)
+├── hooks/          useFormulario, useListado (paginación en servidor), useConsulta
+├── rutas/          RutaProtegida y RutaPublica
+├── utilidades/     validaciones, formato, errores, constantes y menús
+├── componentes/    comunes (modales, estados), formularios, datos (tablas, paginación), diseño
+├── paginas/        publico, cliente, taquilla, admin y comun
+└── estilos/        CSS con la paleta del prototipo de Figma
+```
+
+### Pantallas por rol
+
+| Rol | Rutas |
+|---|---|
+| Sin sesión | `/login`, `/registro`, `/recuperar`, `/restablecer?token=...` |
+| Cliente | `/cliente`, `/cliente/viajes/:id/asientos`, `/cliente/confirmacion`, `/cliente/reservaciones`, `/cliente/perfil` |
+| Taquillero | `/taquilla`, `/taquilla/vender`, `/taquilla/vender/:id`, `/taquilla/boletos`, `/taquilla/perfil` |
+| Administrador | `/admin`, `/admin/terminales`, `/admin/rutas`, `/admin/autobuses`, `/admin/choferes`, `/admin/viajes`, `/admin/reservaciones`, `/admin/boletos`, `/admin/usuarios`, `/admin/perfil` |
+
+Si una ruta no corresponde al rol de la sesión, se muestra la pantalla 403; sin sesión se redirige a `/login`.
+
+### Cómo se cumple lo que pide la rúbrica
+
+| Requisito | Dónde está |
+|---|---|
+| Token JWT en cada petición | `api/clienteApi.js` (interceptor de Axios) |
+| Rutas protegidas por rol | `rutas/RutaProtegida.jsx` y `App.jsx` |
+| Validaciones bajo cada campo, en tiempo real y al enviar | `hooks/useFormulario.js` y `componentes/formularios/` |
+| Errores 422 del servidor bajo el campo correspondiente | `FormularioDinamico.jsx` |
+| Paginación y filtros en el servidor | `hooks/useListado.js` (manda `pagina`, `tamano` y filtros) |
+| Barra superior con nombre, correo, avatar, perfil y cerrar sesión | `componentes/diseno/BarraSuperior.jsx` |
+| Modales de confirmación, sin `alert` ni `confirm` | `componentes/comunes/Modal.jsx` y `ModalConfirmacion.jsx` |
+| Estados de carga y errores de red con reintento | `componentes/comunes/EstadosPantalla.jsx` |
+| Diseño responsivo | menú lateral tipo cajón y tablas en tarjetas en celular |
 
 ## Variables de configuración
 
@@ -93,7 +146,10 @@ Las variables sensibles van en `backend/src/main/resources/application.propertie
 - conexión a la base de datos
 - `app.jwt.secreto` y `app.jwt.expiracionMs`
 - configuración de correo (Postfix)
-- credenciales de Twilio
+- credenciales de Twilio e Infobip
+- `app.frontend.url` (dirección del frontend; el correo de recuperación enlaza a `/restablecer?token=...`)
+
+El frontend solo usa `frontend/.env` (tampoco se sube): `VITE_PROXY_DESTINO` para desarrollo y, opcionalmente, `VITE_API_URL`.
 
 ## Diagrama entidad-relación
 
@@ -238,9 +294,31 @@ Los errores regresan en JSON: 400 datos inválidos de negocio, 401 sin token o c
 
 ## Despliegue en el VPS
 
-1. Subir el jar (`mvn clean package -DskipTests`) y correrlo como servicio con systemd.
-2. Compilar el frontend (`npm run build`) y servir la carpeta `dist` con Nginx.
-3. Nginx hace proxy de `/api` hacia `localhost:8080`.
-4. Certificado HTTPS con Let's Encrypt: `sudo certbot --nginx -d tu-dominio`.
-5. Postfix instalado en el mismo VPS, con registros SPF y DKIM en el DNS del dominio.
+1. Subir el jar (`mvn clean package -DskipTests`) y correrlo como servicio con systemd. El backend escucha en el puerto 8090.
+2. Compilar el frontend (`npm run build`) y copiar el contenido de `frontend/dist` a `/var/www/terminal`.
+3. Nginx sirve esa carpeta, regresa `index.html` para cualquier ruta del frontend y hace proxy de `/api` hacia `localhost:8090`:
 
+   ```nginx
+   server {
+       listen 80;
+       server_name equipo05.com www.equipo05.com;
+
+       root /var/www/terminal;
+       index index.html;
+
+       location /api/ {
+           proxy_pass http://localhost:8090;
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+       }
+
+       location / {
+           try_files $uri /index.html;
+       }
+   }
+   ```
+
+4. Certificado HTTPS con Let's Encrypt: `sudo certbot --nginx -d equipo05.com -d www.equipo05.com`.
+5. Postfix instalado en el mismo VPS, con registros SPF y DKIM en el DNS del dominio.
