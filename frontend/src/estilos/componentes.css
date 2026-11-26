@@ -709,3 +709,20 @@
     justify-content: center;
   }
 }
+
+/* teléfono: lista de prefijo internacional junto al número */
+.campo__telefono {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.campo__telefono .campo__prefijo {
+  flex: 0 0 auto;
+  width: 4.6rem;
+  padding: 0 0.25rem 0 0.6rem;
+}
+
+.campo__telefono .campo__entrada {
+  flex: 1 1 auto;
+  min-width: 0;
+}

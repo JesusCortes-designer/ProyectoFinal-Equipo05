@@ -86,7 +86,7 @@ const obtenerCampos = (modo) => {
       etiqueta: creacion ? 'Teléfono (obligatorio para clientes)' : 'Teléfono (opcional)',
       tipo: 'telefono',
       icono: 'telefono',
-      marcador: '+525512345678',
+      marcador: '5512345678',
       reglas: [
         (valor, valores) =>
           creacion && valores.rol === 'CLIENTE' && !String(valor || '').trim()

@@ -8,8 +8,7 @@ export default function MenuLateral({ opciones, abierto, alCerrar, alCerrarSesio
       <div className="menu-lateral__marca">
         <Logo tamano={38} />
         <div className="menu-lateral__nombre">
-          <span>Terminal de</span>
-          <strong>Autobuses</strong>
+          <strong>PuntoBus</strong>
         </div>
         <button type="button" className="menu-lateral__cerrar" onClick={alCerrar} aria-label="Cerrar menú">
           <Icono nombre="x" tamano={20} />

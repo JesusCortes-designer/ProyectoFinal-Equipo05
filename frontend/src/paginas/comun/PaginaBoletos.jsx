@@ -78,7 +78,7 @@ export default function PaginaBoletos() {
       <ModalConfirmacion
         abierto={Boolean(boletoACancelar)}
         titulo="Cancelar boleto"
-        mensaje={boletoACancelar ? `¿Seguro que deseas cancelar el boleto ${boletoACancelar.codigo}?` : ''}
+        mensaje={boletoACancelar ? '¿Seguro que deseas cancelar el boleto?' : ''}
         detalle="El asiento quedará libre para otros pasajeros."
         textoConfirmar="Sí, cancelar"
         tipo="peligro"

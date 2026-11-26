@@ -39,7 +39,7 @@ const CAMPOS = [
     nombre: 'telefono',
     etiqueta: 'Teléfono',
     tipo: 'telefono',
-    marcador: '+525512345678',
+    marcador: '5512345678',
     ancho: 'mitad',
     reglas: [requerido('El teléfono es obligatorio'), telefonoValido],
   },

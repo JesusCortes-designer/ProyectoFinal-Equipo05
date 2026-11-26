@@ -109,7 +109,7 @@ export default function PaginaRegistro() {
               etiqueta="Teléfono (SMS y WhatsApp)"
               tipo="telefono"
               icono="telefono"
-              marcador="+525512345678"
+              marcador="5512345678"
             />
           </div>
           <div className="formulario__completo">

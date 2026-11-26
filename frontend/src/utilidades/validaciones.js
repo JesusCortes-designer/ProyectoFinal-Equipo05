@@ -22,7 +22,7 @@ export const contrasenaSegura = (valor) =>
 export const telefonoValido = (valor) =>
   estaVacio(valor) || REGEX_TELEFONO.test(String(valor).trim())
     ? ''
-    : 'El teléfono debe llevar lada, ejemplo +525512345678';
+    : 'El teléfono no es válido: solo dígitos, entre 10 y 15 contando la lada';
 
 export const longitudMaxima = (maximo) => (valor) =>
   estaVacio(valor) || String(valor).length <= maximo ? '' : `Admite máximo ${maximo} caracteres`;

@@ -19,7 +19,7 @@ const SOLO_TOTAL = { pagina: 1, tamano: 1 };
 async function cargarResumen() {
   const [usuarios, terminales, viajes, reservaciones, boletos, ultimas] = await Promise.all([
     usuarioServicio.listar(SOLO_TOTAL),
-    terminalServicio.listar(SOLO_TOTAL),
+    terminalServicio.listarDescendente(SOLO_TOTAL),
     viajeServicio.listar({ ...SOLO_TOTAL, estado: 'PROGRAMADO' }),
     reservacionServicio.listar(SOLO_TOTAL),
     boletoServicio.listar(SOLO_TOTAL),
@@ -69,7 +69,7 @@ export default function PaginaDashboardAdmin() {
 
       {resumen.datos && (
         <>
-          <div className="tarjetas-resumen">
+          <div className="tarjetas-resumen tarjetas-resumen--negrita">
             {resumen.datos.tarjetas.map((tarjeta) => (
               <Link key={tarjeta.etiqueta} to={tarjeta.ruta} className="tarjeta tarjeta-resumen">
                 <span className="tarjeta-resumen__icono">

@@ -57,6 +57,10 @@ a.tarjeta-resumen:hover {
   font-size: 0.78rem;
   color: var(--gris-5);
 }
+.tarjetas-resumen--negrita .tarjeta-resumen__etiqueta {
+  font-weight: 700;
+  color: var(--gris-6);
+}
 .tarjeta-resumen__valor {
   display: block;
   font-size: 1.5rem;
@@ -103,12 +107,13 @@ a.tarjeta-resumen:hover {
   gap: 0.5rem 1.6rem;
 }
 .viaje__datos dt {
-  font-size: 0.7rem;
-  color: var(--gris-4);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gris-6);
 }
 .viaje__datos dd {
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* ---------- seleccion de asientos ---------- */
@@ -315,11 +320,12 @@ a.tarjeta-resumen:hover {
   margin-bottom: 1.2rem;
 }
 .datos dt {
-  font-size: 0.75rem;
-  color: var(--gris-4);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gris-6);
 }
 .datos dd {
-  font-weight: 500;
+  font-weight: 400;
   word-break: break-word;
 }
 

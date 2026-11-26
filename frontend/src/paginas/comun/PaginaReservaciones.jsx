@@ -89,7 +89,7 @@ export default function PaginaReservaciones({ esAdministrador = false }) {
       <ModalConfirmacion
         abierto={Boolean(reservacionACancelar)}
         titulo="Cancelar reservación"
-        mensaje={reservacionACancelar ? `¿Seguro que deseas cancelar la reservación #${reservacionACancelar.id}?` : ''}
+        mensaje={reservacionACancelar ? '¿Seguro que deseas cancelar la reservación?' : ''}
         detalle="Se cancelarán todos los boletos de la reservación y los asientos quedarán libres."
         textoConfirmar="Sí, cancelar"
         tipo="peligro"

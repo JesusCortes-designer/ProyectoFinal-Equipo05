@@ -8,6 +8,6 @@ export default function useTituloPagina(titulo) {
 
   useEffect(() => {
     if (establecerTitulo) establecerTitulo(titulo);
-    document.title = `${titulo} · Terminal de Autobuses`;
+    document.title = `${titulo} · PuntoBus`;
   }, [titulo, establecerTitulo]);
 }

@@ -30,7 +30,8 @@
   color: var(--azul-2);
 }
 .menu-lateral__nombre strong {
-  font-size: 0.95rem;
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
   color: #fff;
 }
 .menu-lateral__cerrar {
@@ -207,28 +208,15 @@
   background: #fff;
 }
 
-.autenticacion__marca {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.autenticacion__imagen {
   flex: 1 1 45%;
-  padding: 2rem;
-  background: linear-gradient(160deg, var(--azul-6), var(--azul-7));
-  color: #fff;
-  text-align: center;
-}
-.autenticacion__marca-contenido {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  max-width: 380px;
-}
-.autenticacion__marca h1 {
-  font-size: 1.8rem;
-}
-.autenticacion__marca p {
-  color: var(--azul-2);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: var(--azul-7);
+  background-image: url('/urban.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .autenticacion__formulario {
@@ -236,7 +224,7 @@
   align-items: center;
   justify-content: center;
   flex: 1 1 55%;
-  padding: 2rem 1.25rem;
+  padding: 4.5rem 1.25rem 3rem;
 }
 .autenticacion__caja {
   width: 100%;
@@ -253,11 +241,11 @@
   font-size: 0.9rem;
   margin: 0.25rem 0 1.5rem;
 }
-.autenticacion__logo-movil {
-  display: none;
+.autenticacion__logo {
+  display: flex;
   justify-content: center;
   color: var(--azul-6);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 .autenticacion__enlaces {
   display: flex;
@@ -304,11 +292,8 @@
 }
 
 @media (max-width: 820px) {
-  .autenticacion__marca {
+  .autenticacion__imagen {
     display: none;
-  }
-  .autenticacion__logo-movil {
-    display: flex;
   }
 }
 
