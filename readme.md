@@ -50,9 +50,11 @@ Se cargan solos la primera vez que arranca el backend.
 
 ## Instalación en local
 
-Necesitas Java 17, Maven, Node.js 18+ y MySQL 8.
+Requisitos: Java 17, Maven, Node.js 18+ y MySQL 8.
 
 ### Backend
+
+Crear la base de datos y copiar el archivo de configuración de ejemplo:
 
 ```bash
 cd backend
@@ -60,13 +62,13 @@ mysql -u root -p -e "CREATE DATABASE terminal_autobuses CHARACTER SET utf8mb4;"
 cp src/main/resources/application.properties.example src/main/resources/application.properties
 ```
 
-Edita `application.properties` con tus datos (usuario y contraseña de MySQL, secreto del JWT, correo y credenciales de Twilio e Infobip). Para generar el secreto del JWT:
+Completar `application.properties` con usuario y contraseña de MySQL, secreto del JWT, datos del correo y credenciales de Twilio e Infobip. El secreto del JWT se genera con:
 
 ```bash
 openssl rand -base64 32
 ```
 
-Arranca:
+Iniciar el backend:
 
 ```bash
 mvn spring-boot:run
@@ -85,9 +87,9 @@ cp .env.example .env      # en PowerShell: Copy-Item .env.example .env
 npm run dev
 ```
 
-Se abre en `http://localhost:5173`. En desarrollo, Vite redirige las peticiones de `/api` al backend, así que no hay problemas de CORS. Si el backend corre en otro puerto, cambia `VITE_PROXY_DESTINO` en `frontend/.env`.
+La aplicación queda en `http://localhost:5173`. En desarrollo, Vite redirige las peticiones de `/api` al backend, por lo que no hay problemas de CORS. Si el backend corre en otro puerto, se modifica `VITE_PROXY_DESTINO` en `frontend/.env`.
 
-Para generar la versión de producción:
+Versión de producción:
 
 ```bash
 npm run build      # crea frontend/dist
@@ -95,7 +97,7 @@ npm run build      # crea frontend/dist
 
 ### Pruebas con Bruno
 
-Abre la carpeta `terminal-autobuses-bruno/` desde Bruno, elige el entorno y corre primero `Login` para obtener el token JWT.
+Abrir la carpeta `terminal-autobuses-bruno/` en Bruno, seleccionar el entorno y ejecutar primero `Login` para obtener el token JWT.
 
 ## Frontend
 
@@ -294,9 +296,9 @@ Los errores regresan en JSON: 400 datos inválidos de negocio, 401 sin token o c
 
 ## Despliegue en el VPS
 
-1. Subir el jar (`mvn clean package -DskipTests`) y correrlo como servicio con systemd. El backend escucha en el puerto 8090.
-2. Compilar el frontend (`npm run build`) y copiar el contenido de `frontend/dist` a `/var/www/terminal`.
-3. Nginx sirve esa carpeta, regresa `index.html` para cualquier ruta del frontend y hace proxy de `/api` hacia `localhost:8090`:
+1. Generar el jar (`mvn clean package -DskipTests`), subirlo al servidor y ejecutarlo como servicio con systemd. El backend escucha en el puerto 8090.
+2. Generar el frontend (`npm run build`) y copiar el contenido de `frontend/dist` a `/var/www/terminal`.
+3. Configurar Nginx para que sirva esa carpeta, regrese `index.html` para cualquier ruta del frontend y haga proxy de `/api` hacia `localhost:8090`:
 
    ```nginx
    server {
