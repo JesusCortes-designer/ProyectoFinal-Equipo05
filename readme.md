@@ -1,6 +1,13 @@
-# Sistema de Terminal de Autobuses
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="frontend/public/logo-blanco.svg">
+    <img src="frontend/public/logo.svg" alt="Logo de PuntoBus" width="140">
+  </picture>
+</p>
 
-Proyecto final full stack, Equipo 05.
+<h1 align="center">PuntoBus</h1>
+
+<p align="center">Sistema de Terminal de Autobuses · Proyecto final full stack, Equipo 05</p>
 
 ## Integrantes
 
@@ -29,12 +36,37 @@ Sistema web para administrar una terminal de autobuses. El administrador da de a
 - **Pruebas de API:** Bruno (carpeta `terminal-autobuses-bruno/`)
 - **Despliegue:** VPS con Nginx, Let's Encrypt (Certbot) y systemd
 
+## Diseño: logo y paleta de colores
+
+| | |
+|---|---|
+| **Nombre del negocio** | PuntoBus |
+| **Logo** | Autobús dentro de un círculo, diseñado por el equipo (`frontend/public/logo.svg` y `logo-blanco.svg` para fondos oscuros) |
+| **Prototipo** | [Figma](https://www.figma.com/proto/CgJETkFHI0XdeYHSdm8bhr/Sin-t%C3%ADtulo?node-id=135-229&t=IhKYrEGkzcojsuzK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=135%3A2258) |
+
+La paleta se basa en la **regla 60-30-10**, que reparte el color en tres niveles de peso para que la interfaz se vea equilibrada:
+
+| Peso | Color | Uso en la interfaz | Valores |
+|---|---|---|---|
+| **60 %** | Blanco y grises claros | Fondos, tarjetas y tablas, para que el contenido respire y se lea con facilidad | `#FFFFFF`, `#F0F1F1` |
+| **30 %** | Azules | Menú lateral, barra superior, encabezados de tablas, botones principales y enlaces | `#043B60`, `#095D94`, `#1181CB` |
+| **10 %** | Naranja | Acciones y puntos importantes: "Elegir asientos", "Confirmar reservación", precios y opción activa del menú | `#CC7215`, `#FD953F` |
+
+**Por qué estos colores**
+
+- **Azul como color principal.** Es un color frío asociado con calma, confianza y seguridad, adecuado para un sistema donde el usuario compra viajes y deja sus datos. También relaciona la marca con el cielo y la carretera.
+- **Blanco para el fondo.** Da descanso visual y hace que los azules y el naranja destaquen donde corresponde.
+- **Naranja como color de acento.** Está en el lado opuesto del azul en la rueda de color, es decir, es su **color complementario**. Ese contraste hace que los elementos importantes se noten de inmediato sin saturar la pantalla, porque solo ocupa cerca del 10 %.
+- **Variaciones de tono.** Aunque en el código hay más de tres colores, todos son tonos más claros u oscuros de los mismos azules, del naranja y del gris. Se usan para estados como hover, bordes y fondos suaves, y se mantiene la misma armonía. Las variables están en `frontend/src/estilos/base.css` (`--azul-1` a `--azul-7`, `--naranja-1` a `--naranja-6`, `--gris-1` a `--gris-7`).
+- **Tipografía.** Poppins, de trazo geométrico y legible en pantallas pequeñas.
+
 ## Estructura del repositorio
 
 ```
 ├── backend/                    API REST con Spring Boot
 ├── frontend/                   aplicación React (Vite)
 ├── terminal-autobuses-bruno/   colección de pruebas de la API
+├── respaldo.sql                respaldo de la base de datos (estructura y datos de prueba)
 └── readme.md
 ```
 
@@ -75,6 +107,17 @@ mvn spring-boot:run
 ```
 
 Flyway crea las tablas y `SemillaDatos` carga los datos de prueba. La API queda en `http://localhost:8080/api`.
+
+### Restaurar el respaldo de la base de datos (opcional)
+
+El archivo `respaldo.sql` de la raíz contiene la estructura y los datos de prueba. Sirve como alternativa a dejar que Flyway y `SemillaDatos` creen todo al arrancar:
+
+```bash
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS terminal_autobuses CHARACTER SET utf8mb4;"
+mysql -u root -p terminal_autobuses < respaldo.sql
+```
+
+El respaldo incluye la tabla `flyway_schema_history`, así que al iniciar el backend Flyway reconoce que las migraciones ya están aplicadas.
 
 ### Frontend
 
@@ -278,6 +321,7 @@ Todos (menos `/api/auth/**`) llevan el header `Authorization: Bearer <token>`. L
 |---|---|
 | `POST /api/auth/login`, `/registro`, `/logout`, `/recuperar`, `/restablecer` | público |
 | `GET /api/usuarios/perfil` | cualquier usuario con sesión |
+| `PUT /api/usuarios/perfil/contrasena` (cambiar la propia contraseña) | cualquier usuario con sesión |
 | `/api/usuarios` (CRUD, filtros `buscar` y `rol`) | Administrador |
 | `/api/terminales`, `/api/autobuses`, `/api/choferes` | GET: Administrador y Taquillero. Escritura: Administrador |
 | `/api/rutas`, `/api/viajes` | GET: cualquier usuario con sesión. Escritura: Administrador |

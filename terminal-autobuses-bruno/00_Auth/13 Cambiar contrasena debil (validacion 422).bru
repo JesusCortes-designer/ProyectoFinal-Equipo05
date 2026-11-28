@@ -1,0 +1,32 @@
+meta {
+  name: Cambiar contrasena debil (validacion 422)
+  type: http
+  seq: 13
+}
+
+put {
+  url: {{url}}/api/usuarios/perfil/contrasena
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "contrasenaActual": "{{adminPass}}",
+    "nuevaContrasena": "debil"
+  }
+}
+
+assert {
+  res.status: eq 422
+}
+
+tests {
+  test("responde 422", function() {
+    expect(res.getStatus()).to.equal(422);
+  });
+}

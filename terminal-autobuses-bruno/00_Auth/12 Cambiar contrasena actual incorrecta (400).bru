@@ -1,0 +1,32 @@
+meta {
+  name: Cambiar contrasena actual incorrecta (400)
+  type: http
+  seq: 12
+}
+
+put {
+  url: {{url}}/api/usuarios/perfil/contrasena
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenAdmin}}
+}
+
+body:json {
+  {
+    "contrasenaActual": "Incorrecta1!",
+    "nuevaContrasena": "NuevaClave1!"
+  }
+}
+
+assert {
+  res.status: eq 400
+}
+
+tests {
+  test("responde 400", function() {
+    expect(res.getStatus()).to.equal(400);
+  });
+}

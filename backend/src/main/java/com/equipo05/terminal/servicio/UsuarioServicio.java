@@ -1,5 +1,6 @@
 package com.equipo05.terminal.servicio;
 
+import com.equipo05.terminal.dto.peticion.CambioContrasenaPeticion;
 import com.equipo05.terminal.dto.peticion.UsuarioEdicionPeticion;
 import com.equipo05.terminal.dto.peticion.UsuarioPeticion;
 import com.equipo05.terminal.dto.respuesta.PaginaRespuesta;
@@ -51,6 +52,20 @@ public class UsuarioServicio {
         Usuario usuario = usuarioRepositorio.findByCorreo(correo)
                 .orElseThrow(() -> new RecursoNoEncontradoExcepcion("Usuario no encontrado"));
         return UsuarioRespuesta.de(usuario);
+    }
+
+    // aqui el usuario cambia su contrasena, primero se comprueba la actual
+    @Transactional
+    public void cambiarContrasena(String correo, CambioContrasenaPeticion peticion) {
+        Usuario usuario = usuarioRepositorio.findByCorreo(correo)
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("Usuario no encontrado"));
+        if (!codificador.matches(peticion.contrasenaActual(), usuario.getContrasena())) {
+            throw new DatosInvalidosExcepcion("La contraseña actual no es correcta");
+        }
+        if (codificador.matches(peticion.nuevaContrasena(), usuario.getContrasena())) {
+            throw new DatosInvalidosExcepcion("La nueva contraseña debe ser distinta a la actual");
+        }
+        usuario.setContrasena(codificador.encode(peticion.nuevaContrasena()));
     }
 
     @Transactional

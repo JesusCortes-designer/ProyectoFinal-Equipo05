@@ -1,7 +1,9 @@
 package com.equipo05.terminal.controlador;
 
+import com.equipo05.terminal.dto.peticion.CambioContrasenaPeticion;
 import com.equipo05.terminal.dto.peticion.UsuarioEdicionPeticion;
 import com.equipo05.terminal.dto.peticion.UsuarioPeticion;
+import com.equipo05.terminal.dto.respuesta.MensajeRespuesta;
 import com.equipo05.terminal.dto.respuesta.PaginaRespuesta;
 import com.equipo05.terminal.dto.respuesta.UsuarioRespuesta;
 import com.equipo05.terminal.servicio.UsuarioServicio;
@@ -24,6 +26,15 @@ public class UsuarioControlador {
     @PreAuthorize("isAuthenticated()")
     public UsuarioRespuesta perfil(Authentication autenticacion) {
         return usuarioServicio.perfil(autenticacion.getName());
+    }
+
+    // cualquier usuario con sesion puede cambiar su propia contrasena
+    @PutMapping("/perfil/contrasena")
+    @PreAuthorize("isAuthenticated()")
+    public MensajeRespuesta cambiarContrasena(@Valid @RequestBody CambioContrasenaPeticion peticion,
+                                              Authentication autenticacion) {
+        usuarioServicio.cambiarContrasena(autenticacion.getName(), peticion);
+        return new MensajeRespuesta("Contraseña actualizada correctamente");
     }
 
     @GetMapping
