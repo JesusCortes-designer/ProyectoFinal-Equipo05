@@ -15,14 +15,14 @@ const COLUMNAS = [
   { titulo: 'ID', clave: 'id' },
   { titulo: 'Nombre completo', render: (fila) => `${fila.nombre} ${fila.apellido}` },
   { titulo: 'Edad', clave: 'edad' },
-  { titulo: 'Correo electrónico', clave: 'correo' },
+  { titulo: 'Correo Electrónico', clave: 'correo' },
   { titulo: 'Rol', render: (fila) => <Insignia valor={fila.rol} /> },
   { titulo: 'Estado', render: (fila) => <Insignia valor={fila.activo ? 'ACTIVO' : 'INACTIVO'} /> },
 ];
 
 const FILTROS = [
   { nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar por nombre o correo...' },
-  { nombre: 'rol', tipo: 'seleccion', opciones: OPCIONES_ROL, etiquetaTodos: 'Rol: todos' },
+  { nombre: 'rol', tipo: 'seleccion', opciones: OPCIONES_ROL, etiquetaTodos: 'Todos' },
 ];
 
 // al crear se piden correo y contraseña; al editar no (el backend no los modifica)
@@ -123,7 +123,7 @@ export default function PaginaUsuarios() {
   return (
     <PaginaCrud
       titulo="Usuarios"
-      encabezado="Usuarios del sistema"
+      encabezado="Usuarios del Sistema"
       servicio={usuarioServicio}
       columnas={COLUMNAS}
       filtros={FILTROS}
@@ -131,7 +131,7 @@ export default function PaginaUsuarios() {
       aValores={aValores}
       describirFila={describirFila}
       nombreElemento="Usuario"
-      textoAgregar="Agregar usuario"
+      textoAgregar="Agregar Usuario"
       mensajeVacio="No se encontraron usuarios"
     />
   );

@@ -18,9 +18,9 @@ const COLUMNAS = [
 ];
 
 const FILTROS = [
-  { nombre: 'origen', tipo: 'busqueda', marcador: 'Origen...' },
-  { nombre: 'destino', tipo: 'busqueda', marcador: 'Destino...' },
-  { nombre: 'estado', tipo: 'seleccion', opciones: OPCIONES_ESTADO_VIAJE, etiquetaTodos: 'Estado: todos' },
+  { nombre: 'origen', tipo: 'busqueda', marcador: 'Buscar por origen...' },
+  { nombre: 'destino', tipo: 'busqueda', marcador: 'Buscar por destino...' },
+  { nombre: 'estado', tipo: 'seleccion', opciones: OPCIONES_ESTADO_VIAJE, etiquetaTodos: 'Todos' },
 ];
 
 const CAMPOS = [
@@ -93,7 +93,7 @@ export default function PaginaViajes() {
   return (
     <PaginaCrud
       titulo="Viajes"
-      encabezado="Programación de viajes"
+      encabezado="Programación de Viajes"
       servicio={viajeServicio}
       columnas={COLUMNAS}
       filtros={FILTROS}
@@ -101,7 +101,7 @@ export default function PaginaViajes() {
       aValores={aValores}
       describirFila={describirFila}
       nombreElemento="Viaje"
-      textoAgregar="Programar viaje"
+      textoAgregar="Programar Viaje"
       mensajeVacio="No hay viajes programados"
     />
   );

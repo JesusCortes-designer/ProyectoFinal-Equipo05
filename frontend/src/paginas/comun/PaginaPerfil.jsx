@@ -98,7 +98,7 @@ export default function PaginaPerfil() {
 
         <div className="perfil__detalle">
           <div className="tarjeta">
-            <h3 className="tarjeta__titulo">Datos personales</h3>
+            <h3 className="tarjeta__titulo">Datos Personales</h3>
             <dl className="datos">
               <div>
                 <dt>Nombre</dt>
@@ -109,7 +109,7 @@ export default function PaginaPerfil() {
                 <dd>{perfil.apellido}</dd>
               </div>
               <div>
-                <dt>Correo electrónico</dt>
+                <dt>Correo Electrónico</dt>
                 <dd>{perfil.correo}</dd>
               </div>
               <div>
@@ -126,20 +126,20 @@ export default function PaginaPerfil() {
 
             {!mostrarCambio && (
               <button type="button" className="boton boton--primario" onClick={() => setMostrarCambio(true)}>
-                Cambiar contraseña
+                Cambiar Contraseña
               </button>
             )}
           </div>
 
           {mostrarCambio && (
             <div className="tarjeta">
-              <h3 className="tarjeta__titulo">Cambiar contraseña</h3>
+              <h3 className="tarjeta__titulo">Cambiar Contraseña</h3>
               <form className="formulario" onSubmit={guardar} noValidate>
                 <div className="formulario__rejilla">
                   <div className="formulario__completo">
                     <CampoFormulario
                       {...propiedades('contrasenaActual')}
-                      etiqueta="Contraseña actual"
+                      etiqueta="Contraseña Actual"
                       tipo="contrasena"
                       icono="candado"
                       autoComplete="current-password"
@@ -148,7 +148,7 @@ export default function PaginaPerfil() {
                   <div className="formulario__mitad">
                     <CampoFormulario
                       {...propiedades('nuevaContrasena')}
-                      etiqueta="Nueva contraseña"
+                      etiqueta="Nueva Contraseña"
                       tipo="contrasena"
                       icono="candado"
                       autoComplete="new-password"
@@ -157,7 +157,7 @@ export default function PaginaPerfil() {
                   <div className="formulario__mitad">
                     <CampoFormulario
                       {...propiedades('confirmacion')}
-                      etiqueta="Confirmar nueva contraseña"
+                      etiqueta="Confirmar Nueva Contraseña"
                       tipo="contrasena"
                       icono="candado"
                       autoComplete="new-password"

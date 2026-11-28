@@ -12,8 +12,8 @@ import { interpretarError } from '../../utilidades/errores';
 import { formatearFechaHora, formatearMoneda } from '../../utilidades/formato';
 
 const FILTROS = [
-  { nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar por código de boleto...' },
-  { nombre: 'estado', tipo: 'seleccion', opciones: OPCIONES_ESTADO_BOLETO, etiquetaTodos: 'Estado: todos' },
+  { nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar por código...' },
+  { nombre: 'estado', tipo: 'seleccion', opciones: OPCIONES_ESTADO_BOLETO, etiquetaTodos: 'Todos' },
 ];
 
 const NOMBRES_FILTROS = FILTROS.map((filtro) => filtro.nombre);

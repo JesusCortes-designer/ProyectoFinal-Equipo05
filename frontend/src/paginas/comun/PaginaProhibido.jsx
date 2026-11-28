@@ -12,7 +12,6 @@ export default function PaginaProhibido() {
     <div className="pagina-error">
       <p className="pagina-error__codigo">403</p>
       <h1>No tienes permiso para ver esta página</h1>
-      <p>Tu rol no tiene acceso a esta sección.</p>
       <Link to={usuario ? RUTA_INICIO[usuario.rol] : '/login'} className="boton boton--primario">
         Volver al inicio
       </Link>

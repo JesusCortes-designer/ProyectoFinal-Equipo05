@@ -10,7 +10,7 @@ const COLUMNAS = [
   { titulo: 'Administrador', clave: 'administradorNombre' },
 ];
 
-const FILTROS = [{ nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar terminal por nombre o ciudad...' }];
+const FILTROS = [{ nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar terminal...' }];
 
 const CAMPOS = [
   {
@@ -50,7 +50,7 @@ export default function PaginaTerminales() {
       aValores={aValores}
       describirFila={describirFila}
       nombreElemento="Terminal"
-      textoAgregar="Agregar terminal"
+      textoAgregar="Agregar Terminal"
       mensajeVacio="No hay terminales registradas"
     />
   );

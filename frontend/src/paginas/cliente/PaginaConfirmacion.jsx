@@ -21,7 +21,7 @@ export default function PaginaConfirmacion() {
         <span className="confirmacion-reserva__icono">
           <Icono nombre="check" tamano={36} grosor={2.6} />
         </span>
-        <h2>¡Reservación confirmada!</h2>
+        <h2>¡Reservación Confirmada!</h2>
         <p className="confirmacion-reserva__codigo">Reservación #{reservacion.id}</p>
 
         <dl className="resumen__lista">

@@ -16,7 +16,7 @@ const COLUMNAS = [
 
 const FILTROS = [
   { nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar por placa o modelo...' },
-  { nombre: 'estado', tipo: 'seleccion', opciones: OPCIONES_ESTADO_AUTOBUS, etiquetaTodos: 'Estado: todos' },
+  { nombre: 'estado', tipo: 'seleccion', opciones: OPCIONES_ESTADO_AUTOBUS, etiquetaTodos: 'Todos' },
 ];
 
 const CAMPOS = [

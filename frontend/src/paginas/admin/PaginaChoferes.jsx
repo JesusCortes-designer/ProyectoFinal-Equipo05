@@ -11,7 +11,7 @@ const COLUMNAS = [
   { titulo: 'Terminal', clave: 'terminalNombre' },
 ];
 
-const FILTROS = [{ nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar chofer por nombre o licencia...' }];
+const FILTROS = [{ nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar por nombre o licencia...' }];
 
 const CAMPOS = [
   {
@@ -75,7 +75,7 @@ export default function PaginaChoferes() {
       aValores={aValores}
       describirFila={describirFila}
       nombreElemento="Chofer"
-      textoAgregar="Agregar chofer"
+      textoAgregar="Agregar Chofer"
       mensajeVacio="No hay choferes registrados"
     />
   );

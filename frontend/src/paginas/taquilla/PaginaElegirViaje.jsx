@@ -10,7 +10,7 @@ export default function PaginaElegirViaje() {
       <header className="pagina__encabezado">
         <div>
           <p className="pagina__saludo">Paso 1 de 2</p>
-          <h2>Elige el viaje</h2>
+          <h2>Elige el Viaje</h2>
         </div>
       </header>
 

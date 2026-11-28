@@ -12,7 +12,7 @@ import { interpretarError } from '../../utilidades/errores';
 import { formatearFechaHora, formatearMoneda } from '../../utilidades/formato';
 
 const FILTROS_ADMIN = [
-  { nombre: 'estado', tipo: 'seleccion', opciones: OPCIONES_ESTADO_RESERVACION, etiquetaTodos: 'Estado: todas' },
+  { nombre: 'estado', tipo: 'seleccion', opciones: OPCIONES_ESTADO_RESERVACION, etiquetaTodos: 'Todas' },
 ];
 
 const viajeDe = (reservacion) => {
@@ -22,7 +22,7 @@ const viajeDe = (reservacion) => {
 
 // la misma pagina sirve para el cliente (solo sus reservaciones) y para el administrador (todas)
 export default function PaginaReservaciones({ esAdministrador = false }) {
-  const titulo = esAdministrador ? 'Reservaciones' : 'Mis reservaciones';
+  const titulo = esAdministrador ? 'Reservaciones' : 'Mis Reservaciones';
   useTituloPagina(titulo);
   const avisos = useAvisos();
 

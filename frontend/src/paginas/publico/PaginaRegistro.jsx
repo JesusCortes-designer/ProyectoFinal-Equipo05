@@ -85,15 +85,15 @@ export default function PaginaRegistro() {
       <form onSubmit={enviar} noValidate className="formulario">
         <div className="formulario__rejilla">
           <div className="formulario__mitad">
-            <CampoFormulario {...propiedades('nombre')} etiqueta="Nombre" icono="usuario" marcador="Emily" />
+            <CampoFormulario {...propiedades('nombre')} etiqueta="Nombre(s)" marcador="Emily" />
           </div>
           <div className="formulario__mitad">
-            <CampoFormulario {...propiedades('apellido')} etiqueta="Apellido" marcador="Johnson" />
+            <CampoFormulario {...propiedades('apellido')} etiqueta="Apellidos" marcador="Johnson" />
           </div>
           <div className="formulario__completo">
             <CampoFormulario
               {...propiedades('correo')}
-              etiqueta="Correo electrónico"
+              etiqueta="Correo Electrónico"
               tipo="correo"
               icono="correo"
               marcador="correo@ejemplo.com"
@@ -101,12 +101,12 @@ export default function PaginaRegistro() {
             />
           </div>
           <div className="formulario__mitad">
-            <CampoFormulario {...propiedades('edad')} etiqueta="Edad" tipo="numero" marcador="25" atributos={{ min: 1, max: 120 }} />
+            <CampoFormulario {...propiedades('edad')} etiqueta="Edad" tipo="numero" atributos={{ min: 1, max: 110 }} />
           </div>
           <div className="formulario__mitad">
             <CampoFormulario
               {...propiedades('telefono')}
-              etiqueta="Teléfono (SMS y WhatsApp)"
+              etiqueta="Teléfono"
               tipo="telefono"
               icono="telefono"
               marcador="5512345678"
@@ -125,7 +125,7 @@ export default function PaginaRegistro() {
           <div className="formulario__completo">
             <CampoFormulario
               {...propiedades('confirmacion')}
-              etiqueta="Confirmar contraseña"
+              etiqueta="Confirmar Contraseña"
               tipo="contrasena"
               icono="candado"
               marcador="••••••••"
@@ -141,7 +141,7 @@ export default function PaginaRegistro() {
         )}
 
         <button type="submit" className="boton boton--primario boton--ancho" disabled={enviando}>
-          {enviando ? 'Registrando...' : 'Registrarme'}
+          {enviando ? 'Registrando...' : 'Registrar'}
         </button>
       </form>
 

@@ -55,7 +55,7 @@ export default function PaginaInicioTaquilla() {
       <header className="pagina__encabezado">
         <div>
           <p className="pagina__saludo">Bienvenido, {usuario.nombre}</p>
-          <h2>Panel de taquilla</h2>
+          <h2>Panel de Taquilla</h2>
         </div>
       </header>
 
@@ -79,7 +79,7 @@ export default function PaginaInicioTaquilla() {
           </div>
 
           <div className="tarjeta">
-            <h3 className="tarjeta__titulo">Próximas salidas</h3>
+            <h3 className="tarjeta__titulo">Próximas Salidas</h3>
             {panel.datos.proximos.length === 0 ? (
               <p className="texto-suave">No hay salidas programadas.</p>
             ) : (

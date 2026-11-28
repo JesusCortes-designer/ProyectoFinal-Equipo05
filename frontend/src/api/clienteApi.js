@@ -1,17 +1,14 @@
 import axios from 'axios';
 
-// claves con las que se guarda la sesion en el navegador
 export const CLAVE_TOKEN = 'terminal_token';
 export const CLAVE_USUARIO = 'terminal_usuario';
 
-// cliente de axios: todas las peticiones salen por aqui
 const clienteApi = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
   timeout: 20000,
   headers: { 'Content-Type': 'application/json' },
 });
 
-// agrega el token JWT en el header Authorization de cada peticion
 clienteApi.interceptors.request.use((configuracion) => {
   const token = localStorage.getItem(CLAVE_TOKEN);
   if (token) {

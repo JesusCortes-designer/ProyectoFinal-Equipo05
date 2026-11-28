@@ -11,11 +11,11 @@ export default function PaginaInicioCliente() {
       <header className="pagina__encabezado">
         <div>
           <p className="pagina__saludo">Bienvenido, {usuario.nombre}</p>
-          <h2>Salidas disponibles</h2>
+          <h2>Salidas Disponibles</h2>
         </div>
       </header>
 
-      <ListaViajes rutaDestino={(viaje) => `/cliente/viajes/${viaje.id}/asientos`} textoBoton="Elegir asientos" />
+      <ListaViajes rutaDestino={(viaje) => `/cliente/viajes/${viaje.id}/asientos`} textoBoton="Elegir Asientos" />
     </section>
   );
 }

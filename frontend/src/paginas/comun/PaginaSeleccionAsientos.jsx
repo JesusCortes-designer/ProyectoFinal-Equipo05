@@ -13,9 +13,6 @@ import viajeServicio from '../../servicios/viajeServicio';
 import { interpretarError } from '../../utilidades/errores';
 import { formatearFechaHora, formatearMoneda } from '../../utilidades/formato';
 
-// la misma pantalla sirve para dos casos:
-//  modo "cliente": puede elegir varios asientos y crea una reservacion
-//  modo "taquilla": elige un solo asiento y vende el boleto en ventanilla
 export default function PaginaSeleccionAsientos({ modo }) {
   useTituloPagina(modo === 'taquilla' ? 'Vender boleto' : 'Selección de asientos');
   const { id } = useParams();
@@ -81,7 +78,7 @@ export default function PaginaSeleccionAsientos({ modo }) {
       <header className="pagina__encabezado">
         <div>
           <Link to={rutaLista} className="enlace">
-            ← Volver a las salidas
+            ← Volver
           </Link>
           <h2>
             {viaje.origen} → {viaje.destino}
@@ -143,7 +140,7 @@ export default function PaginaSeleccionAsientos({ modo }) {
               <dd>{seleccionados.length ? seleccionados.join(', ') : 'Ninguno'}</dd>
             </div>
             <div>
-              <dt>Precio por asiento</dt>
+              <dt>Precio por Asiento</dt>
               <dd>{formatearMoneda(viaje.precio)}</dd>
             </div>
           </dl>
@@ -163,7 +160,7 @@ export default function PaginaSeleccionAsientos({ modo }) {
             disabled={seleccionados.length === 0 || salio}
             onClick={() => setConfirmando(true)}
           >
-            {esTaquilla ? 'Emitir boleto' : 'Confirmar reservación'}
+            {esTaquilla ? 'Emitir boleto' : 'Confirmar Reservación'}
           </button>
         </aside>
       </div>

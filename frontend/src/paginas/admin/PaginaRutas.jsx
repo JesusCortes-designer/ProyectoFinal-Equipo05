@@ -9,11 +9,11 @@ const COLUMNAS = [
   { titulo: 'Ruta', render: (fila) => `${fila.origen} → ${fila.destino}` },
   { titulo: 'Distancia', render: (fila) => `${fila.distanciaKm} km` },
   { titulo: 'Duración', render: (fila) => formatearDuracion(fila.duracionMinutos) },
-  { titulo: 'Precio base', render: (fila) => formatearMoneda(fila.precioBase) },
+  { titulo: 'Precio Base', render: (fila) => formatearMoneda(fila.precioBase) },
   { titulo: 'Terminales', render: (fila) => fila.terminales.join(', ') },
 ];
 
-const FILTROS = [{ nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar ruta por origen o destino...' }];
+const FILTROS = [{ nombre: 'buscar', tipo: 'busqueda', marcador: 'Buscar ruta...' }];
 
 const CAMPOS = [
   {
@@ -85,7 +85,7 @@ export default function PaginaRutas() {
       aValores={aValores}
       describirFila={describirFila}
       nombreElemento="Ruta"
-      textoAgregar="Agregar ruta"
+      textoAgregar="Agregar Ruta"
       mensajeVacio="No hay rutas registradas"
     />
   );

@@ -40,7 +40,7 @@ export default function PaginaLogin() {
   };
 
   return (
-    <DisenoAutenticacion titulo="Iniciar sesión" subtitulo="Ingresa con tu correo y contraseña">
+    <DisenoAutenticacion titulo="Iniciar sesión" subtitulo="Ingresa tu correo y contraseña">
       {sesionExpirada && !errorGeneral && (
         <p className="formulario__aviso" role="status">
           Tu sesión expiró. Vuelve a iniciar sesión.
@@ -50,7 +50,7 @@ export default function PaginaLogin() {
       <form onSubmit={enviar} noValidate className="formulario">
         <CampoFormulario
           nombre="correo"
-          etiqueta="Correo electrónico"
+          etiqueta="Correo Electrónico"
           tipo="correo"
           icono="correo"
           marcador="correo@ejemplo.com"
@@ -93,7 +93,7 @@ export default function PaginaLogin() {
         <span>
           ¿No tienes cuenta?{' '}
           <Link to="/registro" className="enlace enlace--acento">
-            Regístrate como cliente
+            Regístrate
           </Link>
         </span>
       </div>

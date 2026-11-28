@@ -30,7 +30,7 @@ async function cargarResumen() {
     tarjetas: [
       { etiqueta: 'Usuarios', valor: usuarios.totalElementos, icono: 'usuario', ruta: '/admin/usuarios' },
       { etiqueta: 'Terminales', valor: terminales.totalElementos, icono: 'ubicacion', ruta: '/admin/terminales' },
-      { etiqueta: 'Viajes programados', valor: viajes.totalElementos, icono: 'calendario', ruta: '/admin/viajes' },
+      { etiqueta: 'Viajes Programados', valor: viajes.totalElementos, icono: 'calendario', ruta: '/admin/viajes' },
       { etiqueta: 'Reservaciones', valor: reservaciones.totalElementos, icono: 'boleto', ruta: '/admin/reservaciones' },
       { etiqueta: 'Boletos', valor: boletos.totalElementos, icono: 'lista', ruta: '/admin/boletos' },
     ],
@@ -84,7 +84,7 @@ export default function PaginaDashboardAdmin() {
           </div>
 
           <div className="tarjeta">
-            <h3 className="tarjeta__titulo">Últimas reservaciones</h3>
+            <h3 className="tarjeta__titulo">Últimas Reservaciones</h3>
             {resumen.datos.ultimas.length === 0 ? (
               <p className="texto-suave">Todavía no hay reservaciones.</p>
             ) : (
