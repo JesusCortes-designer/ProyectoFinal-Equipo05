@@ -17,12 +17,12 @@ body:json {
   }
 }
 
-script:post-response {
-  bru.setVar("tokenAdmin", res.body.token);
-}
-
 assert {
   res.status: eq 200
+}
+
+script:post-response {
+  bru.setVar("tokenAdmin", res.body.token);
 }
 
 tests {
